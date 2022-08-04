@@ -60,11 +60,20 @@ func (l *logger) Error(v ...interface{}) {
 	l.errorLogger.Println(v...)
 
 }
+
+func (l *logger) Panic(v ...interface{}) {
+	l.errorLogger.Panicln(v...)
+}
+
+func (l *logger) Fatal(v ...interface{}) {
+	l.errorLogger.Fatalln(v...)
+}
+
 func (l *logger) SetLogLevel(logLevel int) {
 	l.logLevel = &logLevel
 }
 
-func GetLoger(name string) (logger *logger) {
+func GetLogger(name string) (logger *logger) {
 	if v, ok := loggers[name]; ok {
 		return v
 	} else {
