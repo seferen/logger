@@ -41,18 +41,18 @@ func NewLogger(name string) *logger {
 }
 
 func (l *logger) Debug(v ...interface{}) {
-	if *l.logLevel >= DebugLogLevel {
+	if *l.logLevel <= DebugLogLevel {
 		l.debubLogger.Println(v...)
 	}
 }
 
 func (l *logger) Info(v ...interface{}) {
-	if *l.logLevel >= InfoLogLevel {
+	if *l.logLevel <= InfoLogLevel {
 		l.infoLogger.Println(v...)
 	}
 }
 func (l *logger) Warn(v ...interface{}) {
-	if *l.logLevel >= WarnLogLevel {
+	if *l.logLevel <= WarnLogLevel {
 		l.warnLogger.Println(v...)
 	}
 }
@@ -60,11 +60,20 @@ func (l *logger) Error(v ...interface{}) {
 	l.errorLogger.Println(v...)
 
 }
+
+func (l *logger) Panic(v ...interface{}) {
+	l.errorLogger.Panicln(v...)
+}
+
+func (l *logger) Fatal(v ...interface{}) {
+	l.errorLogger.Fatalln(v...)
+}
+
 func (l *logger) SetLogLevel(logLevel int) {
 	l.logLevel = &logLevel
 }
 
-func GetLoger(name string) (logger *logger) {
+func GetLogger(name string) (logger *logger) {
 	if v, ok := loggers[name]; ok {
 		return v
 	} else {
