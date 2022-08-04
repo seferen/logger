@@ -41,18 +41,18 @@ func NewLogger(name string) *logger {
 }
 
 func (l *logger) Debug(v ...interface{}) {
-	if *l.logLevel >= DebugLogLevel {
+	if *l.logLevel <= DebugLogLevel {
 		l.debubLogger.Println(v...)
 	}
 }
 
 func (l *logger) Info(v ...interface{}) {
-	if *l.logLevel >= InfoLogLevel {
+	if *l.logLevel <= InfoLogLevel {
 		l.infoLogger.Println(v...)
 	}
 }
 func (l *logger) Warn(v ...interface{}) {
-	if *l.logLevel >= WarnLogLevel {
+	if *l.logLevel <= WarnLogLevel {
 		l.warnLogger.Println(v...)
 	}
 }
